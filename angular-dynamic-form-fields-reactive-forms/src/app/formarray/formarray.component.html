@@ -1,0 +1,59 @@
+<div class="container">
+
+	<h1>Angular FormArray Task</h1>
+
+	<form [formGroup]="form" (ngSubmit)="submit()">
+
+
+
+		<table class="table" formArrayName="contacts">
+			<tr>
+				<th colspan="3"></th>
+				<th width="150px">
+
+					<button type="button" class="btn btn-primary" (click)="addContact()"
+						style="background: blueviolet;">Add</button>
+				</th>
+			</tr>
+
+			<tr *ngFor="let contact of contactFormGroup.controls; let i = index;" [formGroupName]="i">
+				<td style="width: 30%;">
+					Between A Distance of
+					<input class="form-control" formControlName="from" type="number"
+						[ngClass]="{'inValid': (getContactsFormGroup(i).controls['from'].touched || submitted)&& getContactsFormGroup(i).controls['from'].hasError('required')}">
+					<span class="text-danger"
+						*ngIf="(getContactsFormGroup(i).controls['from'].touched || submitted)&& getContactsFormGroup(i).controls['from'].hasError('required')">
+						From is required! </span>
+				</td>
+				<td style="width: 30%;">
+					To
+					<input class="form-control" formControlName="to" type="number"
+						[ngClass]="{'inValid': (getContactsFormGroup(i).controls['to'].touched || submitted) && getContactsFormGroup(i).controls['to'].hasError('required')}">
+					<span class="text-danger"
+						*ngIf="(getContactsFormGroup(i).controls['to'].touched || submitted)&& getContactsFormGroup(i).controls['to'].hasError('required')">
+						To is required! </span>
+					<span class="text-danger"
+						*ngIf="(getContactsFormGroup(i).controls['to'].touched || submitted) && getContactsFormGroup(i).controls['to'].hasError('greatersValidator')">
+						To value should be lessthan from range! </span>
+
+				</td>
+				<td style="width: 30%;">
+					Collect A delivery fee of
+					<input class="form-control" formControlName="charge" type="number"
+						[ngClass]="{'inValid': (getContactsFormGroup(i).controls['charge'].touched || submitted) && getContactsFormGroup(i).controls['charge'].hasError('required')}">
+					<span class="text-danger"
+						*ngIf="(getContactsFormGroup(i).controls['charge'].touched || submitted) && getContactsFormGroup(i).controls['charge'].hasError('required')">
+						Delivery fee is required! </span>
+				</td>
+				<td style="padding: 1rem 0 0 0;">
+					<button (click)="removeContact(i)" class="btn btn-danger" style="background: brown;">Remove</button>
+				</td>
+			</tr>
+		</table>
+
+		<button type="submit" class="btn btn-success">Submit</button>
+
+	</form>
+
+	<br />{{contactList.value | json}}
+</div>
