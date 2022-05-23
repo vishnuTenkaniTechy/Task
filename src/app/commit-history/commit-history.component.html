@@ -1,0 +1,24 @@
+<div class="container" *ngIf="commitHistory != undefined">
+
+    <h1 class="display-3">vishnuTenkaniTechy/Task Commit History Below</h1>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">NO</th>
+                <th scope="col">Commit By</th>
+                <th scope="col">Message</th>
+                <th scope="col">Sha (code)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of commitHistory; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.committer.login}}</td>
+                <td>{{item.commit.message}}</td>
+                <td>{{item.sha}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

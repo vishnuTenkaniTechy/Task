@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {GitapiService} from './providers/gitapi.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,19 +7,11 @@ import {GitapiService} from './providers/gitapi.service'
 })
 export class AppComponent {
   title = 'task';
-  commitHistory:any;
+  
 
-  constructor(private api:GitapiService){
-    this.getCommitHistory()
+  constructor(){
+   
   }
 
-  getCommitHistory(){
-    this.api.getCommitHistory('Task','vishnuTenkaniTechy').subscribe((response:any)=>{
-      console.log(response);
-      if(response){
-        this.commitHistory=response;
-      }
-      
-    })
-  }
+
 }
